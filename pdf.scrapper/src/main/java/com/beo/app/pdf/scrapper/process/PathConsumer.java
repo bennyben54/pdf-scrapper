@@ -6,11 +6,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 
 public class PathConsumer implements Consumer<Path> {
+
+	private static final Logger log = Logger.getLogger(PathConsumer.class.getName());
 
 	private final StringBuilder stringBuilder = new StringBuilder();
 	private final List<String> results = new ArrayList<>();
@@ -27,7 +31,7 @@ public class PathConsumer implements Consumer<Path> {
 
 			Arrays.stream(text.split("\n")).forEachOrdered(new StringConsumer(this));
 		} catch (IOException e) {
-			e.printStackTrace();
+			log.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
