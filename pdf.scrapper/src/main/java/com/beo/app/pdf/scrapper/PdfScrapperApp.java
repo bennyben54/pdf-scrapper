@@ -11,7 +11,7 @@ import com.beo.app.pdf.scrapper.process.ProcessPdf;
 public class PdfScrapperApp {
 	public static void main(String[] args) throws IOException {
 		ProcessPdf processPdf = new ProcessPdf();
-		processPdf.println("/home/xx");
-		processPdf.printToFile("/home/xx", "XX");
+		processPdf.println("/home/xx/");
+		// processPdf.printToFile("/home/xx/", "XX");
 	}
 }

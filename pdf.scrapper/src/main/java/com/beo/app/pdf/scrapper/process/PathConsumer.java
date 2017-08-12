@@ -25,13 +25,15 @@ public class PathConsumer implements Consumer<Path> {
 	}
 
 	public void accept(Path arg0) {
-		try (PDDocument doc = PDDocument.load(arg0.toFile());) {
-			PDFTextStripper strip = new PDFTextStripper();
-			String text = strip.getText(doc);
-
-			Arrays.stream(text.split("\n")).forEachOrdered(new StringConsumer(this));
-		} catch (IOException e) {
-			log.log(Level.SEVERE, e.getMessage(), e);
+		if (arg0.toString().endsWith(".pdf") || arg0.toString().endsWith(".PDF")) {
+			try (PDDocument doc = PDDocument.load(arg0.toFile());) {
+				PDFTextStripper strip = new PDFTextStripper();
+				String text = strip.getText(doc);
+				
+				Arrays.stream(text.split("\n")).forEachOrdered(new StringConsumer(this));
+			} catch (IOException e) {
+				log.log(Level.SEVERE, e.getMessage(), e);
+			}
 		}
 	}
 
